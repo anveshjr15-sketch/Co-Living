@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Co-Living Travel — Host Signup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Become a Host</h1>
+    <p class="muted">Language-matching + optional services</p>
+
+    <form id="hostForm" novalidate>
+      <!-- Contact -->
+      <div class="row">
+        <label>
+          Full Name
+          <input name="fullName" required />
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" required />
+        </label>
+      </div>
+
+      <!-- Listing basics -->
+      <div class="row">
+        <label>
+          City
+          <input name="city" required />
+        </label>
+        <label>
+          Country
+          <input name="country" required />
+        </label>
+      </div>
+
+      <!-- Language matching -->
+      <div class="row">
+        <label>
+          Languages you speak (comma-sep)
+          <input name="languages" placeholder="English, Spanish, Telugu" />
+        </label>
+      </div>
+
+      <!-- Optional services -->
+      <fieldset class="group">
+        <legend>Optional Services</legend>
+        <label class="chk">
+          <input type="checkbox" name="airportPickup" value="yes" />
+          Airport pickup
+        </label>
+        <label class="chk">
+          <input type="checkbox" name="meals" value="yes" />
+          Meals
+        </label>
+        <label class="chk">
+          <input type="checkbox" name="localGuiding" value="yes" />
+          Local guiding
+        </label>
+      </fieldset>
+
+      <!-- Safety window / manual review -->
+      <fieldset class="group">
+        <legend>Reservation Handling</legend>
+        <label class="chk">
+          <input type="checkbox" name="manualReview" value="yes" />
+          I prefer to **manually approve** each reservation request
+        </label>
+      </fieldset>
+
+      <!-- Honeypot for bots -->
+      <input type="text" name="website" autocomplete="off" tabindex="-1" class="hp" aria-hidden="true" />
+
+      <div class="row actions">
+        <button id="submitBtn" type="submit">Submit</button>
+        <span id="status" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // 1) PASTE your deployed Web App URL here (ends with /exec)
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwH-srD0V7efcxU91EOxo6DXA5mksqDvmA3x-Zdp490Lo_dhX192pw1_aR5wrRYo4ogTA/exec";
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
