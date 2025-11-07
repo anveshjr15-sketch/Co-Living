@@ -2,88 +2,258 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Co-Living Travel — Host Signup</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Become a Host — Co-Living Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#8b5cf6; --accent-2:#22d3ee; --border:#1f2937; --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.35); }
+    *{box-sizing:border-box}
+    body{ margin:0; background: radial-gradient(1200px 600px at 10% -10%, rgba(139,92,246,.25), transparent 60%), radial-gradient(900px 600px at 110% 10%, rgba(34,211,238,.15), transparent 60%), var(--bg); color:var(--text); font:16px/1.5 Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; }
+    .wrap{max-width:960px; width:100%}
+    header{margin:0 auto 22px; text-align:center; max-width:760px}
+    h1{font-size:32px; line-height:1.2; margin:0 0 8px}
+    p.lead{color:var(--muted); margin:0}
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width:840px){ .card{grid-template-columns:1fr} }
+    label{display:block; font-weight:600; margin:4px 0 8px}
+    .req{color:#22d3ee; font-weight:600}
+    input, select, textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:#0b1220; color:var(--text); outline:none; }
+    textarea{min-height:96px; resize:vertical}
+    .hint{color:var(--muted); font-size:13px; margin-top:6px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+    .checkgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+    .check{display:flex; gap:8px; align-items:flex-start; padding:8px 10px; border:1px solid var(--border); border-radius:10px}
+    .actions{grid-column:1/-1; display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:8px}
+    button{ background:linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%); color:#0b1220; font-weight:700; border:none; padding:12px 18px; border-radius:12px; cursor:pointer; transition:transform .06s ease; }
+    button:disabled{opacity:.6; cursor:not-allowed}
+    button:hover{transform:translateY(-1px)}
+    .note{color:var(--muted); font-size:12.5px}
+    .msg{display:none; grid-column:1/-1; border-radius:10px; padding:12px 14px}
+    .msg.ok{display:block; background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.45)}
+    .msg.err{display:block; background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.45)}
+    .badge{font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
+    .hidden{position:absolute !important; left:-9999px !important; opacity:0 !important}
+    footer{margin-top:14px; text-align:center; color:var(--muted); font-size:12.5px}
+  </style>
 </head>
 <body>
-  <main class="container">
-    <h1>Become a Host</h1>
-    <p class="muted">Language-matching + optional services</p>
+  <div class="wrap">
+    <header>
+      <div class="badge">Host Sign-Up (Pilot)</div>
+      <h1>Earn by hosting travelers who prefer your language & culture</h1>
+      <p class="lead">List your spare room or unit. Offer optional services (pickup, guiding, meals) for extra income. Join our early pilot.</p>
+    </header>
 
-    <form id="hostForm" novalidate>
-      <!-- Contact -->
+    <form id="hostForm" class="card" novalidate>
       <div class="row">
-        <label>
-          Full Name
-          <input name="fullName" required />
-        </label>
-        <label>
-          Email
-          <input name="email" type="email" required />
-        </label>
+        <div>
+          <label>Full name <span class="req">*</span></label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div>
+          <label>Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
       </div>
 
-      <!-- Listing basics -->
-      <div class="row">
-        <label>
-          City
-          <input name="city" required />
-        </label>
-        <label>
-          Country
-          <input name="country" required />
-        </label>
+      <div class="row3">
+        <div>
+          <label>Country <span class="req">*</span></label>
+          <select id="country" name="country" required>
+            <option value="">Select…</option>
+            <option>United States</option><option>Canada</option><option>United Kingdom</option>
+            <option>India</option><option>EU (Other)</option><option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label>City / Area <span class="req">*</span></label>
+          <input id="city" name="city" required />
+        </div>
+        <div>
+          <label>Phone / WhatsApp (optional)</label>
+          <input id="phone" name="phone" />
+        </div>
       </div>
 
-      <!-- Language matching -->
-      <div class="row">
-        <label>
-          Languages you speak (comma-sep)
-          <input name="languages" placeholder="English, Spanish, Telugu" />
-        </label>
+      <div>
+        <label>Languages you can host in <span class="req">*</span></label>
+        <div class="checkgrid">
+          <label class="check"><input type="checkbox" name="languages" value="English">English</label>
+          <label class="check"><input type="checkbox" name="languages" value="Spanish">Spanish</label>
+          <label class="check"><input type="checkbox" name="languages" value="Hindi">Hindi</label>
+          <label class="check"><input type="checkbox" name="languages" value="Telugu">Telugu</label>
+          <label class="check"><input type="checkbox" name="languages" value="Tamil">Tamil</label>
+          <label class="check"><input type="checkbox" name="languages" value="French">French</label>
+          <label class="check"><input type="checkbox" name="languages" value="Arabic">Arabic</label>
+          <label class="check"><input type="checkbox" name="languages" value="Other">Other</label>
+        </div>
       </div>
 
-      <!-- Optional services -->
-      <fieldset class="group">
-        <legend>Optional Services</legend>
-        <label class="chk">
-          <input type="checkbox" name="airportPickup" value="yes" />
-          Airport pickup
-        </label>
-        <label class="chk">
-          <input type="checkbox" name="meals" value="yes" />
-          Meals
-        </label>
-        <label class="chk">
-          <input type="checkbox" name="localGuiding" value="yes" />
-          Local guiding
-        </label>
-      </fieldset>
+      <div class="row">
+        <div>
+          <label>What space can you offer? <span class="req">*</span></label>
+          <select id="spaceType" name="spaceType" required>
+            <option value="">Select…</option>
+            <option>Private room (shared home)</option>
+            <option>Entire unit (apt/house/studio)</option>
+            <option>Shared room (2–4 beds)</option>
+            <option>ADU / in-law suite</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label>When could you start hosting? <span class="req">*</span></label>
+          <select id="startWindow" name="startWindow" required>
+            <option value="">Select…</option>
+            <option>Within 30 days</option>
+            <option>1–3 months</option>
+            <option>3–6 months</option>
+            <option>More than 6 months</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+      </div>
 
-      <!-- Safety window / manual review -->
-      <fieldset class="group">
-        <legend>Reservation Handling</legend>
-        <label class="chk">
-          <input type="checkbox" name="manualReview" value="yes" />
-          I prefer to **manually approve** each reservation request
+      <div class="row">
+        <div>
+          <label>Expected nightly price (private room) USD</label>
+          <input id="priceRoom" name="priceRoom" type="number" min="0" step="1" placeholder="e.g., 60" />
+          <div class="hint">Leave blank if N/A</div>
+        </div>
+        <div>
+          <label>Expected nightly price (entire unit) USD</label>
+          <input id="priceUnit" name="priceUnit" type="number" min="0" step="1" placeholder="e.g., 120" />
+          <div class="hint">Leave blank if N/A</div>
+        </div>
+      </div>
+
+      <div>
+        <label>Optional services you’re willing to offer</label>
+        <div class="checkgrid">
+          <label class="check"><input type="checkbox" name="services" value="Pickup/Drop-off">Pickup / Drop-off</label>
+          <label class="check"><input type="checkbox" name="services" value="Local guiding">Local guiding / sightseeing</label>
+          <label class="check"><input type="checkbox" name="services" value="Home-cooked meals">Home-cooked meals</label>
+          <label class="check"><input type="checkbox" name="services" value="Grocery support">Grocery support</label>
+          <label class="check"><input type="checkbox" name="services" value="Shared activities">Shared activities</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Co-living comfort <span class="req">*</span></label>
+          <select id="coliving" name="coliving" required>
+            <option value="">Select…</option>
+            <option>Comfortable (shared kitchen/living)</option>
+            <option>Comfortable with limits (hours/areas)</option>
+            <option>Prefer separate unit only</option>
+            <option>Not comfortable with co-living</option>
+          </select>
+        </div>
+        <div>
+          <label>Are you okay with guest language-matching? <span class="req">*</span></label>
+          <select id="langMatch" name="langMatch" required>
+            <option value="">Select…</option>
+            <option>Yes</option><option>Maybe</option><option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label>Anything else we should know? (optional)</label>
+        <textarea id="notes" name="notes" placeholder="House rules, availability windows, special amenities…"></textarea>
+      </div>
+
+      <input class="hidden" id="company" name="company" tabindex="-1" autocomplete="off" />
+
+      <div class="actions">
+        <label class="check" style="border:none;padding:0">
+          <input id="consent" type="checkbox" required>
+          <span>I agree to be contacted about pilot hosting opportunities and accept the privacy notice.</span>
         </label>
-      </fieldset>
-
-      <!-- Honeypot for bots -->
-      <input type="text" name="website" autocomplete="off" tabindex="-1" class="hp" aria-hidden="true" />
-
-      <div class="row actions">
-        <button id="submitBtn" type="submit">Submit</button>
-        <span id="status" role="status" aria-live="polite"></span>
+        <button id="submitBtn" type="submit">Submit Host Application</button>
+        <div id="formMsg" class="msg"></div>
+        <span class="note">We’ll never share your details. You can opt out anytime.</span>
       </div>
     </form>
-  </main>
+
+    <footer>© Co-Living Travel — early pilot</footer>
+  </div>
 
   <script>
-    // 1) PASTE your deployed Web App URL here (ends with /exec)
-    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwH-srD0V7efcxU91EOxo6DXA5mksqDvmA3x-Zdp490Lo_dhX192pw1_aR5wrRYo4ogTA/exec";
-  </script>
-  <script src="app.js"></script>
+    const endpoint = "https://script.google.com/macros/s/AKfycbwH-srD0V7efcxU91EOxo6DXA5mksqDvmA3x-Zdp490Lo_dhX192pw1_aR5wrRYo4ogTA/exec"; // replace after deploying
+
+    function serializeForm(form){
+    const data = new FormData(form);
+    const obj = {};
+    for (const [k,v] of data.entries()){
+      if (obj[k]) { if (!Array.isArray(obj[k])) obj[k] = [obj[k]]; obj[k].push(v); }
+      else obj[k]=v;
+    }
+    return obj;
+  }
+
+  function showMsg(type, text){
+    const el = document.getElementById('formMsg');
+    el.className = "msg " + (type === 'ok' ? 'ok' : 'err');
+    el.textContent = text;
+  }
+
+  document.getElementById('hostForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const form = e.currentTarget;
+
+    // honeypot
+    if (document.getElementById('company').value) return;
+
+    // requireds
+    for (const id of ['name','email','country','city','spaceType','startWindow','coliving','langMatch']){
+      const el = document.getElementById(id);
+      if (!el.value){ el.focus(); showMsg('err','Please complete required fields.'); return; }
+    }
+    if (!document.getElementById('consent').checked){
+      showMsg('err','Please accept the privacy notice.'); return;
+    }
+
+    btn.disabled = true;
+    showMsg('ok','Submitting…');
+
+    try {
+      const payload = serializeForm(form);
+      payload.timestamp = new Date().toISOString();
+      payload.userAgent = navigator.userAgent || '';
+
+      console.log('POSTing to', endpoint, 'payload:', payload);
+
+      const res = await fetch(endpoint, {
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify(payload)
+      });
+
+      const text = await res.text();
+      console.log('Raw response text:', text);
+
+      let json;
+      try { json = JSON.parse(text); } catch { json = {status:'error', message:'Invalid JSON from server'}; }
+
+      if (json.status === 'ok'){
+        showMsg('ok','Thank you! Your host application was received.');
+        form.reset();
+        document.getElementById('consent').checked = false;
+      } else {
+        showMsg('err', json.message || 'Server error. Check console.');
+        console.error('Server error object:', json);
+      }
+    } catch (err){
+      console.error('Fetch error:', err);
+      showMsg('err','Submission failed. Check your connection and try again.');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
