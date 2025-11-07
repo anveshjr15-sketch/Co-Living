@@ -85,12 +85,29 @@ select:focus, textarea:focus{
   align-items:center;
   gap:10px;
   font-weight:500;
+  margin-bottom:2px;
 }
 .chk input[type="checkbox"]{
   appearance:auto;               /* keep native on iOS */
   width:20px; height:20px;
   margin:0;
   accent-color: var(--accent);   /* modern browsers */
+}
+
+/* -------- CHECKBOX GRID FOR LANGUAGES -------- */
+.languages-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+@media (max-width: 768px) {
+  .languages-list {
+    grid-template-columns: 1fr;        /* Stack vertically on mobile */
+    gap: 10px 0;
+  }
+}
+.languages-list .chk {
+  margin: 0;
 }
 
 /* Field groups */
