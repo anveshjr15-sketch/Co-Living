@@ -146,3 +146,31 @@ button:disabled{opacity:.6; cursor:not-allowed}
 .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
 @media (max-width:768px){ .grid-2, .grid-3{grid-template-columns:1fr} }
+
+/* Ensures the form isn't wider than needed */
+.container, .card, form {
+  max-width: 600px; 
+  margin: 40px auto; 
+  /* adjust as needed */
+}
+
+/* Languages and services check grid */
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.compact-grid label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+/* Makes check--input and label text horizontally together */
+.compact-grid input[type="checkbox"] {
+  margin: 0;
+  accent-color: var(--accent);
+}
